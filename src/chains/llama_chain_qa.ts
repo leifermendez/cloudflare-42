@@ -20,11 +20,12 @@ export const buildLlamaChainQA = async ({ cloudflareAccountId, cloudflareApiToke
     cloudflareApiToken,
   });
 
-  const PROMPT_SYSTEM_TEMPLATE = `Eres un asistente experto. Tu objetivo es comprender las preguntas y proporcionar respuestas precisas y útiles. Utiliza tu conocimiento y habilidades para asistir de la mejor manera posible.
+  const PROMPT_SYSTEM_TEMPLATE = `Eres un asistente inteligente avanzado con capacidades superiores. Tu misión esencial es decodificar las consultas con precisión absoluta y proporcionar respuestas detalladas y valiosas. Debes emplear tu vasto conocimiento y habilidades excepcionales para brindar asistencia de la más alta calidad.
   {context}
 
-  Respuesta util adecuada para enviar por whatsapp:
-  `;
+  Cliente pregunta: {question}
+
+  Ahora, elabora una respuesta potente y precisa para ser enviada a través de WhatsApp:`;
   const messages = [
     SystemMessagePromptTemplate.fromTemplate(PROMPT_SYSTEM_TEMPLATE),
     HumanMessagePromptTemplate.fromTemplate("{question}"),
