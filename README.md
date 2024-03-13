@@ -1,15 +1,74 @@
-npx wrangler vectorize create pdfdb --preset @cf/baai/bge-large-en-v1.5
-https://www.cloudflare.com/es-es/plans/developer-platform/
+# cloudflare-42
 
-curl -X POST \
- 'https://localhost/chat/llama' \
- --header 'Accept: _/_' \
- --header 'Content-Type: application/json' \
- --data-raw '{
-"question": "Quisiera que me ayuden con mis temas migratorios"
+cloudflare-42 is a Cloudflare Workers project powered by Vectorize, designed to handle PDF documents related to Legal and Migration domains with the ultimate goal of text extraction, indexing, and search capabilities.
+
+## Getting Started
+
+To get started, follow these steps:
+
+1. Clone the repository and navigate into the project directory:
+
+```bash
+git https://github.com/leifermendez/cloudflare-42
+cd cloudflare-42
+```
+
+2. Install dependencies:
+
+```bash
+pnpm install
+```
+
+3. Configure your environment variables by creating a `wrangler.toml` file with the necessary parameters:
+
+```
+cp wrangler-example.toml wrangler.toml
+```
+
+```
+[[vectorize]]
+binding = "VECTORIZE_INDEX"
+index_name = "your_database_index"
+
+[vars]
+CLOUDFLARE_ACCOUNT_ID = ""
+CLOUDFLARE_API_TOKEN = ""
+
+```
+
+4. Start the development server:
+
+```bash
+pnpm run dev
+```
+
+## Endpoints
+
+### Text Extraction
+
+POST ingest PDF
+
+```bash
+curl  -X POST \
+  'http://127.0.0.1:8787/ingest/data' \
+  --header 'Accept: */*' \
+  --form 'file=@c:\Ficha Abogado .txt'
+```
+
+### Text Search
+
+Search for specific text in PDF documents:
+
+```bash
+curl  -X POST \
+  'http://localhost:8787/chat/llama' \
+  --header 'Accept: */*' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+    "question":"Que servicios ofrecen?"
 }'
+```
 
-curl -X POST \
- 'http://127.0.0.1:8787/ingest/data' \
- --header 'Accept: _/_' \
- --form 'file=@c:\Ficha Abogado .txt'
+## Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request.
