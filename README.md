@@ -6,20 +6,28 @@ cloudflare-42 is a Cloudflare Workers project powered by Vectorize, designed to 
 
 To get started, follow these steps:
 
-1. Clone the repository and navigate into the project directory:
+**Clone** the repository and navigate into the project directory:
 
 ```bash
 git https://github.com/leifermendez/cloudflare-42
 cd cloudflare-42
 ```
 
-2. Install dependencies:
+**Install** dependencies:
 
 ```bash
 pnpm install
 ```
 
-3. Configure your environment variables by creating a `wrangler.toml` file with the necessary parameters:
+**Setup DB Index**
+
+> For this step you need previous pay [developer plan](https://www.cloudflare.com/es-es/plans/developer-platform/)
+
+```
+npx wrangler vectorize create your_db_index --preset @cf/baai/bge-large-en-v1.5
+```
+
+**Configure** your environment variables by creating a `wrangler.toml` file with the necessary parameters:
 
 ```
 cp wrangler-example.toml wrangler.toml
@@ -28,7 +36,7 @@ cp wrangler-example.toml wrangler.toml
 ```
 [[vectorize]]
 binding = "VECTORIZE_INDEX"
-index_name = "your_database_index"
+index_name = "your_db_index"
 
 [vars]
 CLOUDFLARE_ACCOUNT_ID = ""
